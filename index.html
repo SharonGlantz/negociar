@@ -9,674 +9,401 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Saber Negociar">
 <meta property="og:description" content="El curso on demand para pedir lo que necesitás en el trabajo, sin sobreexplicarte y sin esperar a estar agotada para hablar.">
-<!-- og:image debe ser absoluta. Actualizar cuando se defina el dominio propio. -->
 <meta property="og:image" content="https://sharonglantz.github.io/negociar/assets/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=boska@400,500,700&f[]=switzer@400,500,600&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-/* ─────────────────────────────────────────────
-   Tokens — §3, sin desviarse
-   ───────────────────────────────────────────── */
-:root{
-  --papel:#F2F0EB;
-  --papel-dim:#EBE8E1;      /* banda alterna, ~3% más oscuro */
-  --tinta:#191C1E;
-  --oxido:#7E2B32;
-  --oxido-hover:#6A242A;
-  --pizarra:#5E6A6E;
-  --linea:#D6D2C9;
+  html, body { margin: 0; padding: 0; }
+  body { background: #FAF5EF; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  img { max-width: 100%; display: block; }
 
-  --display:'Boska','Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
-  --cuerpo:'Switzer','Helvetica Neue',Helvetica,Arial,system-ui,sans-serif;
-  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-
-  --medida:62ch;
-  --ancho:1080px;
-  --gutter:clamp(1.25rem,5vw,2.5rem);
-  --ritmo:clamp(3.5rem,12vh,9rem);
-  --safe-l:max(var(--gutter), env(safe-area-inset-left));
-  --safe-r:max(var(--gutter), env(safe-area-inset-right));
-}
-
-/* ─────────────────────────────────────────────
-   Reset
-   ───────────────────────────────────────────── */
-*,*::before,*::after{box-sizing:border-box;}
-html{
-  -webkit-text-size-adjust:100%;   /* iOS no infla el texto al rotar */
-  text-size-adjust:100%;
-  scroll-behavior:smooth;
-}
-body{
-  margin:0;
-  background:var(--papel);
-  color:var(--tinta);
-  font-family:var(--cuerpo);
-  font-size:1.125rem;
-  line-height:1.7;
-  font-weight:400;
-  overflow-x:hidden;              /* red de seguridad contra desbordes */
-  -webkit-font-smoothing:antialiased;
-}
-img{max-width:100%;height:auto;display:block;}
-h1,h2,h3,p,ul,ol,figure,blockquote{margin:0;}
-ul,ol{padding:0;list-style:none;}
-
-/* Palabras largas del español no rompen el layout a 320px */
-h1,h2,h3,p,li,summary,td,th{overflow-wrap:break-word;hyphens:auto;}
-
-@media (prefers-reduced-motion: reduce){
-  html{scroll-behavior:auto;}
-}
-
-/* ─────────────────────────────────────────────
-   Layout — bandas alternas (idea tomada de Story)
-   ───────────────────────────────────────────── */
-.band{
-  padding-block:var(--ritmo);
-  padding-inline:var(--safe-l) var(--safe-r);
-}
-.band--dim{
-  background:var(--papel-dim);
-  border-block:1px solid var(--linea);
-}
-.band--tinta{
-  background:var(--tinta);
-  color:var(--papel);
-}
-.wrap{width:min(var(--medida),100%);margin-inline:auto;}
-.wrap--ancho{width:min(var(--ancho),100%);margin-inline:auto;}
-
-/* ─────────────────────────────────────────────
-   Tipografía
-   ───────────────────────────────────────────── */
-.eyebrow{
-  font-family:var(--mono);
-  font-size:.75rem;
-  font-weight:400;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--pizarra);
-  line-height:1.5;
-  margin-bottom:1.75rem;
-}
-h1{
-  font-family:var(--display);
-  font-size:clamp(2.75rem,7vw,4.5rem);
-  font-weight:500;
-  line-height:1.02;
-  letter-spacing:-.02em;
-}
-h2{
-  font-family:var(--display);
-  font-size:clamp(1.9rem,4vw,2.75rem);
-  font-weight:500;
-  line-height:1.15;
-  letter-spacing:-.01em;
-  margin-bottom:2rem;
-}
-h3{
-  font-family:var(--mono);
-  font-size:.75rem;
-  font-weight:500;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--pizarra);
-  margin-bottom:1.25rem;
-}
-.subhead{
-  font-size:clamp(1.125rem,2.2vw,1.375rem);
-  line-height:1.55;
-  color:var(--pizarra);
-  margin-top:1.75rem;
-  max-width:34ch;
-}
-p + p{margin-top:1.4rem;}
-.destacado{font-weight:600;}
-
-/* ─────────────────────────────────────────────
-   Listas con filete
-   ───────────────────────────────────────────── */
-.marca li{position:relative;padding-left:1.5rem;margin-bottom:1rem;}
-.marca li::before{
-  content:"";
-  position:absolute;
-  left:0;top:.85em;
-  width:.6rem;height:1px;
-  background:var(--linea);
-}
-.band--tinta .marca li::before{background:rgba(242,240,235,.35);}
-
-/* ─────────────────────────────────────────────
-   CTA — §6 al pie de la letra
-   ───────────────────────────────────────────── */
-.cta{
-  display:inline-block;
-  background:var(--oxido);
-  color:var(--papel);
-  font-family:var(--cuerpo);
-  font-size:1rem;
-  font-weight:500;
-  letter-spacing:.01em;
-  line-height:1.2;
-  padding:1.05rem 2.5rem;
-  min-height:44px;               /* objetivo táctil mínimo (Apple HIG) */
-  border-radius:2px;
-  text-decoration:none;
-  transition:background 160ms ease;
-  text-align:center;
-}
-.cta:hover{background:var(--oxido-hover);}
-.cta:focus-visible{outline:2px solid var(--tinta);outline-offset:3px;}
-.band--tinta .cta:focus-visible{outline-color:var(--papel);}
-.cta-fila{margin-top:3rem;}
-
-/* En pantallas chicas el CTA ocupa el ancho: nunca un botón de 280px cortado */
-@media (max-width:480px){
-  .cta{display:block;width:100%;padding-inline:1rem;}
-}
-
-/* Foco general — §3 */
-a:focus-visible,summary:focus-visible{
-  outline:2px solid var(--oxido);
-  outline-offset:3px;
-}
-.band--tinta a:focus-visible,.band--tinta summary:focus-visible{outline-color:var(--papel);}
-
-/* ─────────────────────────────────────────────
-   Elemento firma — la fórmula
-   ───────────────────────────────────────────── */
-.formula{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:1px;
-  background:var(--linea);
-  border:1px solid var(--linea);
-  margin-top:3rem;
-}
-.formula li{background:var(--papel);padding:1.75rem 1.25rem;min-width:0;}
-.formula__num{
-  display:block;
-  font-family:var(--mono);
-  font-size:.75rem;
-  letter-spacing:.12em;
-  color:var(--oxido);
-  margin-bottom:.75rem;
-}
-.formula__label{
-  font-family:var(--display);
-  font-size:clamp(1.05rem,2.4vw,1.3rem);
-  line-height:1.2;
-}
-@media (max-width:640px){
-  .formula{grid-template-columns:repeat(2,minmax(0,1fr));}
-  .formula li{padding:1.35rem 1rem;}
-}
-
-/* Miniatura como separador entre secciones */
-.formula-mini{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  align-items:center;
-  gap:.4rem 1.15rem;
-  padding-block:2.25rem;
-  padding-inline:var(--safe-l) var(--safe-r);
-  font-family:var(--mono);
-  font-size:.6875rem;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--pizarra);
-  border-block:1px solid var(--linea);
-}
-.formula-mini li{white-space:nowrap;}
-.formula-mini li::before{content:attr(data-n) " ";color:var(--oxido);}
-
-/* ─────────────────────────────────────────────
-   Grillas
-   ───────────────────────────────────────────── */
-.tres{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:clamp(2rem,4vw,3.5rem);
-  margin-top:3rem;
-}
-@media (max-width:820px){.tres{grid-template-columns:1fr;gap:2.75rem;}}
-
-.split{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:3rem;}
-.split>div{min-width:0;padding-inline:clamp(1.5rem,3vw,3rem);}
-.split>div:first-child{padding-left:0;border-right:1px solid var(--linea);}
-.split>div:last-child{padding-right:0;color:var(--pizarra);}
-@media (max-width:820px){
-  .split{grid-template-columns:1fr;}
-  .split>div:first-child{
-    padding:0 0 2.5rem;
-    border-right:0;
-    border-bottom:1px solid var(--linea);
+  @media (max-width: 700px) {
+    section, footer { padding-left: 18px !important; padding-right: 18px !important; }
+    [style*="border-radius: 36px"] { border-radius: 24px !important; }
+    [style*="border-radius: 32px"] { border-radius: 22px !important; }
+    [style*="border-radius: 28px"] { border-radius: 20px !important; }
+    [style*="border-radius: 26px"] { border-radius: 20px !important; }
+    [style*="border-radius: 22px"] { border-radius: 18px !important; }
+    [style*="border-radius: 20px"] { border-radius: 16px !important; }
+    [style*="max-width: 460px"] { max-width: 100% !important; }
+    header > span { font-size: 18px !important; }
+    header > a { padding: 11px 17px !important; font-size: 13px !important; }
+    details { padding: 18px 20px !important; }
+    summary { font-size: 16px !important; align-items: flex-start !important; }
+    details p { font-size: 16px !important; }
+    h1 { letter-spacing: -0.02em !important; }
   }
-  .split>div:last-child{padding:2.5rem 0 0;}
-}
+  @media (max-width: 420px) {
+    header > a { padding: 10px 14px !important; font-size: 12.5px !important; }
+    header > span { font-size: 17px !important; }
+  }
 
-/* ─────────────────────────────────────────────
-   Tabla "¿Cómo funciona?" — se apila en mobile
-   ───────────────────────────────────────────── */
-.datos{width:100%;border-collapse:collapse;margin-top:2.5rem;}
-.datos th{
-  width:10rem;
-  text-align:left;
-  vertical-align:top;
-  font-family:var(--mono);
-  font-size:.75rem;
-  font-weight:400;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--pizarra);
-  padding:1.15rem 1.5rem 1.15rem 0;
-  border-bottom:1px solid var(--linea);
-}
-.datos td{padding:1.15rem 0;border-bottom:1px solid var(--linea);}
-@media (max-width:560px){
-  .datos,.datos tbody,.datos tr,.datos th,.datos td{display:block;width:auto;}
-  .datos tr{padding-block:1.15rem;border-bottom:1px solid var(--linea);}
-  .datos th{padding:0 0 .5rem;border-bottom:0;}
-  .datos td{padding:0;border-bottom:0;}
-}
+  summary::-webkit-details-marker { display: none; }
+  a { color: #B0503A; }
+  a:hover { color: #241914; }
 
-/* ─────────────────────────────────────────────
-   Marcadores de contenido pendiente
-   ───────────────────────────────────────────── */
-.todo{
-  display:inline-block;
-  font-family:var(--mono);
-  font-size:.6875rem;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  color:var(--pizarra);
-  background:var(--papel);
-  border:1px dashed var(--linea);
-  border-radius:2px;
-  padding:.3rem .6rem;
-  line-height:1.4;
-}
+  a[data-cta] { position: relative; transition: background 180ms ease, transform 180ms ease, box-shadow 220ms ease !important; }
+  a[data-cta] span[data-arrow] { display: inline-block; transition: transform 220ms cubic-bezier(.2,.7,.2,1); }
+  a[data-cta]:hover span[data-arrow] { transform: translateX(5px); }
+  a[data-cta]:hover { background: #A83412 !important; box-shadow: 0 18px 38px -18px rgba(0, 0, 0, 0.55) !important; }
+  a[data-cta-lift]:hover { transform: translateY(-2px) !important; }
 
-/* ─────────────────────────────────────────────
-   Cita
-   ───────────────────────────────────────────── */
-.cita{
-  font-family:var(--display);
-  font-size:clamp(1.4rem,3vw,1.95rem);
-  line-height:1.3;
-  margin-top:3.5rem;
-  padding-left:clamp(1.25rem,3vw,2rem);
-  border-left:1px solid var(--linea);
-}
+  .footer-link:hover { color: #B0503A !important; }
 
-/* ─────────────────────────────────────────────
-   Sobre Sharon
-   ───────────────────────────────────────────── */
-.bio{
-  display:grid;
-  grid-template-columns:minmax(0,13rem) minmax(0,1fr);
-  gap:clamp(1.75rem,4vw,3rem);
-  align-items:start;
-  margin-top:2.5rem;
-}
-.bio img{width:100%;border-radius:2px;filter:grayscale(1) contrast(1.05);}
-@media (max-width:640px){
-  .bio{grid-template-columns:1fr;}
-  .bio img{max-width:13rem;}
-}
+  @keyframes sn-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-/* ─────────────────────────────────────────────
-   FAQ — <details> nativo, sin JS
-   ───────────────────────────────────────────── */
-.faq{margin-top:2.5rem;border-top:1px solid var(--linea);}
-.faq details{border-bottom:1px solid var(--linea);}
-.faq summary{
-  display:flex;
-  justify-content:space-between;
-  align-items:baseline;
-  gap:1.25rem;
-  cursor:pointer;
-  list-style:none;
-  padding:1.35rem 0;
-  min-height:44px;               /* objetivo táctil */
-  font-family:var(--display);
-  font-size:clamp(1.05rem,2.4vw,1.3rem);
-  line-height:1.35;
-}
-.faq summary::-webkit-details-marker{display:none;}
-.faq summary::after{
-  content:"+";
-  flex:none;
-  font-family:var(--mono);
-  font-size:1rem;
-  color:var(--pizarra);
-}
-.faq details[open] summary::after{content:"–";}
-.faq .respuesta{padding:0 0 1.6rem;color:var(--pizarra);max-width:58ch;}
+  details[open] span[data-chev] { transform: rotate(45deg); }
 
-/* ─────────────────────────────────────────────
-   Cierre + footer
-   ───────────────────────────────────────────── */
-.cierre{
-  padding-block:clamp(4.5rem,14vh,10rem);
-  padding-inline:var(--safe-l) var(--safe-r);
-}
-.cierre p{
-  font-family:var(--display);
-  font-size:clamp(1.6rem,4vw,2.6rem);
-  line-height:1.25;
-}
-.cierre p + p{margin-top:1.5rem;}
+  /* Reveal on scroll — JS toggles .is-visible; without JS everything stays visible. */
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 700ms cubic-bezier(.2,.7,.2,1), transform 700ms cubic-bezier(.2,.7,.2,1);
+  }
+  .js [data-reveal].is-visible { opacity: 1; transform: none; }
 
-.pie{
-  background:var(--tinta);
-  color:var(--pizarra);
-  font-family:var(--mono);
-  font-size:.6875rem;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  padding-block:2.5rem;
-  padding-inline:var(--safe-l) var(--safe-r);
-  padding-bottom:max(2.5rem, env(safe-area-inset-bottom));
-  border-top:1px solid rgba(242,240,235,.12);
-}
-
-/* ─────────────────────────────────────────────
-   Reveal — una sola animación, 300ms (§3)
-   La clase la aplica el JS: sin JS todo queda visible.
-   ───────────────────────────────────────────── */
-.js .reveal{
-  opacity:0;
-  transform:translateY(12px);
-  transition:opacity 300ms ease,transform 300ms ease;
-}
-.js .reveal--izq{transform:translateX(-12px);}
-.js .reveal--der{transform:translateX(12px);}
-.js .reveal.visible{opacity:1;transform:none;}
-
-@media (prefers-reduced-motion: reduce){
-  .js .reveal{opacity:1!important;transform:none!important;transition:none!important;}
-}
+  @media (prefers-reduced-motion: reduce) {
+    .js [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+  }
 </style>
 </head>
-
 <body>
 <script>document.documentElement.classList.add('js');</script>
 
-<!-- ═══════════════ 5.1 Hero ═══════════════ -->
-<header class="band">
-  <div class="wrap reveal">
-    <p class="eyebrow">Negociar no es volverte otra persona</p>
-    <h1>Saber Negociar</h1>
-    <p class="subhead">El curso on demand para pedir lo que necesitás en el trabajo, sin sobreexplicarte y sin esperar a estar agotada para hablar.</p>
-    <p class="cta-fila"><a class="cta" href="STRIPE_PAYMENT_LINK_URL">Quiero el curso</a></p>
-  </div>
-</header>
+<div style="font-family: 'Instrument Sans', system-ui, sans-serif; color: #241914; background: #FAF5EF; overflow-x: hidden">
 
-<ol class="formula-mini" aria-hidden="true">
-  <li data-n="01">Contexto</li>
-  <li data-n="02">Observación</li>
-  <li data-n="03">Necesidad</li>
-  <li data-n="04">Propuesta</li>
-</ol>
+  <header style="position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 14px clamp(16px, 4vw, 48px); background: rgba(250, 245, 239, 0.82); backdrop-filter: blur(14px); border-bottom: 1px solid #E6DACB">
+    <span style="font-family: 'Instrument Serif', serif; font-size: 21px; letter-spacing: 0.01em">Saber Negociar</span>
+    <a data-cta data-cta-lift href="STRIPE_PAYMENT_LINK_URL" style="display: inline-flex; align-items: center; padding: 11px 22px; border-radius: 999px; background: #D9481F; color: #FFF6F0; text-decoration: none; font-size: 14px; font-weight: 500">Quiero el curso <span data-arrow>→</span></a>
+  </header>
 
-<!-- ═══════════════ 5.2 Lo que lográs ═══════════════ -->
-<section class="band band--dim">
-  <div class="wrap--ancho">
-    <div class="wrap reveal reveal--izq">
-      <h2>Lo que lográs en Saber Negociar</h2>
-    </div>
-    <div class="tres reveal">
-      <div>
-        <h3>Con vos</h3>
-        <ul class="marca">
-          <li>Diferenciar un miedo real de un miedo anticipado</li>
-          <li>Nombrar lo que necesitás sin pedir perdón por pedirlo</li>
-          <li>Sostener la incomodidad sin retroceder</li>
-        </ul>
+  <section data-screen-label="Hero" style="padding: clamp(48px, 7vw, 96px) clamp(16px, 4vw, 48px) clamp(56px, 7vw, 96px)">
+    <div style="max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: clamp(36px, 5vw, 72px); align-items: center">
+      <div data-reveal style="display: flex; flex-direction: column; gap: 26px">
+        <span style="display: inline-flex; align-self: flex-start; align-items: center; gap: 9px; padding: 8px 16px 8px 12px; border-radius: 999px; background: #F1E7DB; border: 1px solid #E6DACB; font-size: 13px; letter-spacing: 0.01em; color: #5B4840">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: #B0503A"></span>Negociar no es volverte otra persona
+        </span>
+        <h1 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(52px, 8.5vw, 116px); line-height: 0.9; letter-spacing: -0.03em">Saber<br><em style="color: #B0503A">Negociar</em></h1>
+        <p style="margin: 0; max-width: 34ch; font-size: clamp(18px, 1.5vw, 21px); line-height: 1.5; color: #4A382F; text-wrap: pretty">El curso on demand para pedir lo que necesitás en el trabajo, sin sobreexplicarte y sin esperar a estar agotada para hablar.</p>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-top: 6px">
+          <a data-cta data-cta-lift href="STRIPE_PAYMENT_LINK_URL" style="display: inline-flex; align-items: center; padding: 21px 40px; border-radius: 999px; background: #D9481F; color: #FFF6F0; text-decoration: none; font-size: 17px; font-weight: 600; letter-spacing: 0.01em; box-shadow: 0 14px 34px -14px rgba(217, 72, 31, 0.55)">Quiero el curso <span data-arrow>→</span></a>
+          <span style="font-size: 14px; color: #6B5A50">100% on demand · A tu ritmo</span>
+        </div>
       </div>
-      <div>
-        <h3>Con los demás</h3>
-        <ul class="marca">
-          <li>Entrar a una conversación difícil con estrategia, no desde la queja</li>
-          <li>Pedir sin sobreexplicarte</li>
-          <li>Poner tus condiciones sobre la mesa sin dejar de ser vos</li>
-        </ul>
-      </div>
-      <div>
-        <h3>Con tu trabajo</h3>
-        <ul class="marca">
-          <li>Negociar desde valor, no desde permiso</li>
-          <li>Cerrar acuerdos concretos, no buenas intenciones</li>
-          <!-- Copy tal cual §5.2. Posible palabra faltante: "no cuando ya estás agotada". Confirmar con Sharon. -->
-          <li>Hablar a tiempo, no ya estás agotada</li>
-        </ul>
+      <div data-reveal style="display: flex; flex-direction: column; gap: 14px; padding: clamp(24px, 3vw, 36px); border-radius: 28px; background: #F1E7DB; border: 1px solid #E6DACB">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 4px">
+          <span style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B5A50">La fórmula</span>
+          <span style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #B0503A">4 pasos</span>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: 16px; padding: 16px 20px; border-radius: 16px; background: #FAF5EF">
+          <span style="font-family: 'Instrument Serif', serif; font-size: 24px; color: #B0503A; min-width: 30px">01</span>
+          <span style="font-size: 20px; letter-spacing: -0.01em">Contexto</span>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: 16px; padding: 16px 20px; border-radius: 16px; background: #FAF5EF">
+          <span style="font-family: 'Instrument Serif', serif; font-size: 24px; color: #B0503A; min-width: 30px">02</span>
+          <span style="font-size: 20px; letter-spacing: -0.01em">Observación</span>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: 16px; padding: 16px 20px; border-radius: 16px; background: #FAF5EF">
+          <span style="font-family: 'Instrument Serif', serif; font-size: 24px; color: #B0503A; min-width: 30px">03</span>
+          <span style="font-size: 20px; letter-spacing: -0.01em">Necesidad</span>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: 16px; padding: 16px 20px; border-radius: 16px; background: #FAF5EF">
+          <span style="font-family: 'Instrument Serif', serif; font-size: 24px; color: #B0503A; min-width: 30px">04</span>
+          <span style="font-size: 20px; letter-spacing: -0.01em">Propuesta</span>
+        </div>
       </div>
     </div>
-    <div class="wrap">
-      <p class="cta-fila"><a class="cta" href="STRIPE_PAYMENT_LINK_URL">Quiero el curso</a></p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══════════════ 5.3 El problema ═══════════════ -->
-<section class="band">
-  <div class="wrap reveal reveal--der">
-    <h2>Si sentís que tenés argumentos… pero igual te quedás callada, no es casualidad</h2>
-    <p>No es que te falte capacidad.</p>
-    <p>Es que negociar activa algo mucho más profundo que una conversación de trabajo.</p>
-    <ul class="marca" style="margin-top:2rem">
-      <li>Te cuesta poner tus condiciones sin sentir que estás pidiendo de más.</li>
-      <li>Sobreexplicás, como si tuvieras que demostrar que merecés lo que pedís.</li>
-      <li>Decís que sí cuando en realidad querés decir «esto no me sirve».</li>
-      <li>Hablás recién cuando ya estás agotada, y la conversación sale cargada.</li>
-      <li>Te da miedo dejar de ser «la fácil», la que no complica.</li>
-    </ul>
-    <p style="margin-top:2rem">Saber Negociar existe para que puedas <span class="destacado">pedir lo que necesitás sin dejar de ser vos</span>.</p>
-    <p class="cta-fila"><a class="cta" href="STRIPE_PAYMENT_LINK_URL">Quiero el curso</a></p>
-  </div>
-</section>
-
-<ol class="formula-mini" aria-hidden="true">
-  <li data-n="01">Contexto</li>
-  <li data-n="02">Observación</li>
-  <li data-n="03">Necesidad</li>
-  <li data-n="04">Propuesta</li>
-</ol>
-
-<!-- ═══════════════ 5.4 Es / no es para vos ═══════════════ -->
-<section class="band band--dim">
-  <div class="wrap--ancho">
-    <div class="wrap reveal reveal--izq">
-      <h2>Para quién es</h2>
-    </div>
-    <div class="split reveal">
-      <div>
-        <h3>Saber Negociar es para vos si</h3>
-        <ul class="marca">
-          <li>Sos una mujer que rinde, resuelve y sostiene, pero le cuesta horrores pedir algo para sí misma.</li>
-          <li>Te cansaste de acomodarte primero y negociar (si es que negociás) al final, ya agotada.</li>
-          <li>Buscás herramientas concretas para tu próxima conversación difícil, no solo motivación.</li>
-        </ul>
+  <div style="overflow: hidden; padding: 14px 0; background: #241914; color: #F1E7DB">
+    <div style="display: flex; width: max-content; animation: sn-marquee 34s linear infinite">
+      <div style="display: flex; align-items: center; gap: 28px; padding-right: 28px; font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; white-space: nowrap">
+        <span>Contexto</span><span style="color: #B0503A">✳</span><span>Observación</span><span style="color: #B0503A">✳</span><span>Necesidad</span><span style="color: #B0503A">✳</span><span>Propuesta</span><span style="color: #B0503A">✳</span>
+        <span>Contexto</span><span style="color: #B0503A">✳</span><span>Observación</span><span style="color: #B0503A">✳</span><span>Necesidad</span><span style="color: #B0503A">✳</span><span>Propuesta</span><span style="color: #B0503A">✳</span>
+        <span>Contexto</span><span style="color: #B0503A">✳</span><span>Observación</span><span style="color: #B0503A">✳</span><span>Necesidad</span><span style="color: #B0503A">✳</span><span>Propuesta</span><span style="color: #B0503A">✳</span>
       </div>
-      <div>
-        <h3>Saber Negociar no es para vos si</h3>
-        <ul class="marca">
-          <li>Buscás un guión mágico que evite toda incomodidad.</li>
-          <li>Esperás una fórmula que funcione sin que vos tengas que sostener la conversación.</li>
-        </ul>
+      <div style="display: flex; align-items: center; gap: 28px; padding-right: 28px; font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; white-space: nowrap">
+        <span>Contexto</span><span style="color: #B0503A">✳</span><span>Observación</span><span style="color: #B0503A">✳</span><span>Necesidad</span><span style="color: #B0503A">✳</span><span>Propuesta</span><span style="color: #B0503A">✳</span>
+        <span>Contexto</span><span style="color: #B0503A">✳</span><span>Observación</span><span style="color: #B0503A">✳</span><span>Necesidad</span><span style="color: #B0503A">✳</span><span>Propuesta</span><span style="color: #B0503A">✳</span>
+        <span>Contexto</span><span style="color: #B0503A">✳</span><span>Observación</span><span style="color: #B0503A">✳</span><span>Necesidad</span><span style="color: #B0503A">✳</span><span>Propuesta</span><span style="color: #B0503A">✳</span>
       </div>
     </div>
   </div>
-</section>
 
-<!-- ═══════════════ 5.5 ¿Qué es? ═══════════════ -->
-<section class="band">
-  <div class="wrap reveal reveal--der">
-    <h2>¿Qué es Saber Negociar?</h2>
-    <p>Saber Negociar es un curso <span class="destacado">on demand</span> pensado para que puedas:</p>
-    <ul class="marca" style="margin-top:1.75rem">
-      <li>Entender por qué te cuesta pedir lo que necesitás.</li>
-      <li>Diferenciar riesgo real de miedo anticipado.</li>
-      <li>Entrar a una negociación con estrategia, sin sobreexplicarte.</li>
-      <li>Cerrar con un acuerdo concreto, no con una buena intención.</li>
-    </ul>
-    <p class="cta-fila"><a class="cta" href="STRIPE_PAYMENT_LINK_URL">Quiero el curso</a></p>
-  </div>
-</section>
-
-<!-- ═══════════════ 5.6 ¿Cómo funciona? ═══════════════ -->
-<section class="band band--dim">
-  <div class="wrap reveal reveal--izq">
-    <h2>¿Cómo funciona?</h2>
-    <table class="datos">
-      <tbody>
-        <tr>
-          <th scope="row">Duración</th>
-          <td><span class="todo">⟨ A definir ⟩</span></td>
-        </tr>
-        <tr>
-          <th scope="row">Modalidad</th>
-          <td>100% on demand, a tu ritmo</td>
-        </tr>
-        <tr>
-          <th scope="row">Incluye</th>
-          <td><span class="todo">⟨ Videos + herramientas descargables — a confirmar ⟩</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<!-- ═══════════════ 5.7 Entregables ═══════════════ -->
-<section class="band">
-  <div class="wrap reveal">
-    <h2>Entregables concretos</h2>
-    <ul class="marca">
-      <li>Videos on demand con marco conceptual y ejercicios</li>
-      <li>Frases concretas para llevar a tu próxima conversación</li>
-      <li>Guía descargable con la fórmula: <span class="destacado">contexto + observación + necesidad + propuesta</span></li>
-      <li>Práctica corporal breve para sostener la incomodidad sin retroceder</li>
-    </ul>
-
-    <ol class="formula">
-      <li><span class="formula__num">01</span><span class="formula__label">Contexto</span></li>
-      <li><span class="formula__num">02</span><span class="formula__label">Observación</span></li>
-      <li><span class="formula__num">03</span><span class="formula__label">Necesidad</span></li>
-      <li><span class="formula__num">04</span><span class="formula__label">Propuesta</span></li>
-    </ol>
-
-    <blockquote class="cita">
-      Saber Negociar no se trata de aprender a discutir mejor. Se trata de <span class="destacado">dejar de esperar a estar agotada para decir lo que necesitás.</span>
-    </blockquote>
-  </div>
-</section>
-
-<!-- ═══════════════ 5.8 Lo que cambia ═══════════════ -->
-<section class="band band--dim">
-  <div class="wrap reveal reveal--der">
-    <h2>Lo que cambia de verdad</h2>
-    <ul class="marca">
-      <li>Pedís sin sobreexplicarte 40 veces.</li>
-      <li>Negociás desde lo que aportás, no desde lo que esperás que te concedan.</li>
-      <li>Sostenés una conversación incómoda sin achicarte.</li>
-      <li>Cerrás acuerdos concretos, con fecha y con letra clara.</li>
-    </ul>
-    <p class="cta-fila"><a class="cta" href="STRIPE_PAYMENT_LINK_URL">Quiero el curso</a></p>
-  </div>
-</section>
-
-<!-- ═══════════════ Sobre Sharon ═══════════════ -->
-<section class="band">
-  <div class="wrap reveal reveal--izq">
-    <h2>Sobre Sharon</h2>
-    <div class="bio">
-      <!-- ⚠️ IMAGEN PROVISORIA — foto de stock, NO es Sharon.
-           Reemplazar por una foto real antes de publicar el dominio. -->
-      <img src="assets/sharon-placeholder.jpg"
-           alt="Placeholder — reemplazar con foto de Sharon"
-           width="416" height="520">
-      <div>
-        <p><span class="todo">⟨ Bio de Sharon — a completar ⟩</span></p>
+  <section data-screen-label="El problema" style="background: #2E201B; color: #F6EBE2; padding: clamp(64px, 9vw, 128px) clamp(16px, 4vw, 48px)">
+    <div style="max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(32px, 5vw, 80px)">
+      <div data-reveal style="display: flex; flex-direction: column; gap: 28px">
+        <span style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #C9A491">01 — El problema</span>
+        <h2 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(34px, 4.2vw, 60px); line-height: 1.04; letter-spacing: -0.025em; text-wrap: pretty">Si sentís que tenés argumentos… pero igual te quedás callada, <em style="color: #E8A98F">no es casualidad</em></h2>
+        <div style="display: flex; flex-direction: column; gap: 10px; font-size: clamp(17px, 1.4vw, 19px); line-height: 1.55; color: #D6BDAF; max-width: 46ch">
+          <p style="margin: 0">No es que te falte capacidad.</p>
+          <p style="margin: 0">Es que negociar activa algo mucho más profundo que una conversación de trabajo.</p>
+        </div>
+      </div>
+      <div data-reveal style="display: flex; flex-direction: column; gap: 12px">
+        <p style="margin: 0; padding: 20px 24px; border-radius: 18px; background: #3A2822; font-size: 17px; line-height: 1.45">Te cuesta poner tus condiciones sin sentir que estás pidiendo de más.</p>
+        <p style="margin: 0; padding: 20px 24px; border-radius: 18px; background: #3A2822; font-size: 17px; line-height: 1.45">Sobreexplicás, como si tuvieras que demostrar que merecés lo que pedís.</p>
+        <p style="margin: 0; padding: 20px 24px; border-radius: 18px; background: #3A2822; font-size: 17px; line-height: 1.45">Decís que sí cuando en realidad querés decir «esto no me sirve».</p>
+        <p style="margin: 0; padding: 20px 24px; border-radius: 18px; background: #3A2822; font-size: 17px; line-height: 1.45">Hablás recién cuando ya estás agotada, y la conversación sale cargada.</p>
+        <p style="margin: 0; padding: 20px 24px; border-radius: 18px; background: #3A2822; font-size: 17px; line-height: 1.45">Te da miedo dejar de ser «la fácil», la que no complica.</p>
+        <p style="margin: 12px 0 0; font-family: 'Instrument Serif', serif; font-size: clamp(23px, 2.2vw, 30px); line-height: 1.25; text-wrap: pretty">Saber Negociar existe para que puedas pedir lo que necesitás <em style="color: #E8A98F">sin dejar de ser vos</em>.</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══════════════ 5.9 FAQ ═══════════════ -->
-<section class="band band--dim">
-  <div class="wrap reveal">
-    <h2>Preguntas frecuentes</h2>
-    <div class="faq">
-      <details>
-        <summary>¿Cuál es la inversión?</summary>
-        <div class="respuesta"><span class="todo">⟨ A completar ⟩</span></div>
-      </details>
-      <details>
-        <summary>¿Cuánto dura el curso?</summary>
-        <div class="respuesta"><span class="todo">⟨ A completar ⟩</span></div>
-      </details>
-      <details>
-        <summary>¿Necesito estar en un momento «ideal» de mi carrera para hacerlo?</summary>
-        <div class="respuesta">No. Este curso es para la mujer real, en el trabajo real que tiene ahora. No para una versión ideal de vos.</div>
-      </details>
-      <details>
-        <summary>¿Cuándo puedo empezar?</summary>
-        <div class="respuesta"><span class="todo">⟨ A completar — apenas comprás, o desde una fecha de lanzamiento ⟩</span></div>
-      </details>
-      <details>
-        <summary>¿Necesito hacerlo en orden, o puedo ir directo a lo que más me sirve?</summary>
-        <div class="respuesta"><span class="todo">⟨ A completar ⟩</span></div>
-      </details>
+  <section data-screen-label="Qué es" style="padding: clamp(64px, 9vw, 128px) clamp(16px, 4vw, 48px)">
+    <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: clamp(36px, 4vw, 56px)">
+      <div data-reveal style="display: flex; flex-direction: column; gap: 16px; max-width: 24ch">
+        <span style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B5A50">02 — Qué es</span>
+        <h2 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(32px, 4vw, 56px); line-height: 1.05; letter-spacing: -0.025em; text-wrap: pretty">Un curso on demand pensado para que puedas:</h2>
+      </div>
+      <div data-reveal style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px">
+        <div style="display: flex; flex-direction: column; gap: 18px; padding: 28px; border-radius: 22px; border: 1px solid #E6DACB; background: #FDFAF6">
+          <span style="font-family: 'Instrument Serif', serif; font-size: 30px; color: #B0503A">01</span>
+          <p style="margin: 0; font-size: 17px; line-height: 1.45">Entender por qué te cuesta pedir lo que necesitás.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 18px; padding: 28px; border-radius: 22px; border: 1px solid #E6DACB; background: #FDFAF6">
+          <span style="font-family: 'Instrument Serif', serif; font-size: 30px; color: #B0503A">02</span>
+          <p style="margin: 0; font-size: 17px; line-height: 1.45">Diferenciar riesgo real de miedo anticipado.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 18px; padding: 28px; border-radius: 22px; border: 1px solid #E6DACB; background: #FDFAF6">
+          <span style="font-family: 'Instrument Serif', serif; font-size: 30px; color: #B0503A">03</span>
+          <p style="margin: 0; font-size: 17px; line-height: 1.45">Entrar a una negociación con estrategia, sin sobreexplicarte.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 18px; padding: 28px; border-radius: 22px; border: 1px solid #E6DACB; background: #FDFAF6">
+          <span style="font-family: 'Instrument Serif', serif; font-size: 30px; color: #B0503A">04</span>
+          <p style="margin: 0; font-size: 17px; line-height: 1.45">Cerrar con un acuerdo concreto, no con una buena intención.</p>
+        </div>
+      </div>
+      <div data-reveal style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; padding: clamp(24px, 3vw, 34px); border-radius: 26px; background: #F1E7DB">
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <span style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #6B5A50">Duración</span>
+          <span style="font-size: 18px; line-height: 1.4">⟨ A definir ⟩</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <span style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #6B5A50">Modalidad</span>
+          <span style="font-size: 18px; line-height: 1.4">100% on demand, a tu ritmo</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <span style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #6B5A50">Incluye</span>
+          <span style="font-size: 18px; line-height: 1.4">⟨ Videos + herramientas descargables — a confirmar ⟩</span>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══════════════ 5.10 Cierre ═══════════════ -->
-<section class="band--tinta cierre">
-  <div class="wrap reveal">
-    <p>No viniste solo a sostener lo que hay.</p>
-    <p>También viniste a participar en las condiciones en las que querés trabajar.</p>
-    <p class="cta-fila"><a class="cta" href="STRIPE_PAYMENT_LINK_URL">Quiero negociar sin achicarme</a></p>
-  </div>
-</section>
+  <section data-screen-label="Lo que lográs" style="background: #F1E7DB; padding: clamp(64px, 9vw, 128px) clamp(16px, 4vw, 48px)">
+    <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: clamp(36px, 4vw, 56px)">
+      <div data-reveal style="display: flex; flex-direction: column; gap: 16px">
+        <span style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B5A50">03 — Resultados</span>
+        <h2 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(34px, 4.2vw, 60px); line-height: 1.02; letter-spacing: -0.025em">Lo que lográs en Saber Negociar</h2>
+      </div>
+      <div data-reveal style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px">
+        <div style="display: flex; flex-direction: column; gap: 22px; padding: clamp(26px, 3vw, 36px); border-radius: 26px; background: #FAF5EF">
+          <h3 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 30px; letter-spacing: -0.01em">Con vos</h3>
+          <div style="display: flex; flex-direction: column; gap: 14px; font-size: 17px; line-height: 1.45">
+            <p style="margin: 0; padding-top: 14px; border-top: 1px solid #E6DACB">Diferenciar un miedo real de un miedo anticipado</p>
+            <p style="margin: 0; padding-top: 14px; border-top: 1px solid #E6DACB">Nombrar lo que necesitás sin pedir perdón por pedirlo</p>
+            <p style="margin: 0; padding-top: 14px; border-top: 1px solid #E6DACB">Sostener la incomodidad sin retroceder</p>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 22px; padding: clamp(26px, 3vw, 36px); border-radius: 26px; background: #FAF5EF">
+          <h3 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 30px; letter-spacing: -0.01em">Con los demás</h3>
+          <div style="display: flex; flex-direction: column; gap: 14px; font-size: 17px; line-height: 1.45">
+            <p style="margin: 0; padding-top: 14px; border-top: 1px solid #E6DACB">Entrar a una conversación difícil con estrategia, no desde la queja</p>
+            <p style="margin: 0; padding-top: 14px; border-top: 1px solid #E6DACB">Pedir sin sobreexplicarte</p>
+            <p style="margin: 0; padding-top: 14px; border-top: 1px solid #E6DACB">Poner tus condiciones sobre la mesa sin dejar de ser vos</p>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 22px; padding: clamp(26px, 3vw, 36px); border-radius: 26px; background: #2E201B; color: #F6EBE2">
+          <h3 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 30px; letter-spacing: -0.01em">Con tu trabajo</h3>
+          <div style="display: flex; flex-direction: column; gap: 14px; font-size: 17px; line-height: 1.45">
+            <p style="margin: 0; padding-top: 14px; border-top: 1px solid #4B3830">Negociar desde valor, no desde permiso</p>
+            <p style="margin: 0; padding-top: 14px; border-top: 1px solid #4B3830">Cerrar acuerdos concretos, no buenas intenciones</p>
+            <p style="margin: 0; padding-top: 14px; border-top: 1px solid #4B3830">Hablar a tiempo, no cuando ya estás agotada</p>
+          </div>
+        </div>
+      </div>
+      <div data-reveal style="display: flex; flex-wrap: wrap; align-items: center; gap: 18px">
+        <a data-cta href="STRIPE_PAYMENT_LINK_URL" style="display: inline-flex; align-items: center; padding: 21px 40px; border-radius: 999px; background: #D9481F; color: #FFF6F0; text-decoration: none; font-size: 17px; font-weight: 600; letter-spacing: 0.01em; box-shadow: 0 14px 34px -14px rgba(217, 72, 31, 0.55)">Quiero el curso <span data-arrow>→</span></a>
+      </div>
+    </div>
+  </section>
 
-<footer class="pie">
-  <div class="wrap--ancho">
-    <p>© <span id="anio">2026</span> Saber Negociar</p>
-  </div>
-</footer>
+  <section data-screen-label="Entregables" style="padding: clamp(64px, 9vw, 128px) clamp(16px, 4vw, 48px)">
+    <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: clamp(36px, 4vw, 56px)">
+      <div data-reveal style="display: flex; flex-direction: column; gap: 16px; max-width: 20ch">
+        <span style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B5A50">04 — Entregables</span>
+        <h2 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(32px, 4vw, 56px); line-height: 1.05; letter-spacing: -0.025em">Lo que te llevás, concreto</h2>
+      </div>
+      <div data-reveal style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1px; background: #E6DACB; border: 1px solid #E6DACB; border-radius: 26px; overflow: hidden">
+        <div style="background: #FAF5EF; padding: clamp(26px, 3vw, 36px); display: flex; flex-direction: column; gap: 14px">
+          <span style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #B0503A">Videos</span>
+          <p style="margin: 0; font-size: 18px; line-height: 1.45">Videos on demand con marco conceptual y ejercicios.</p>
+        </div>
+        <div style="background: #FAF5EF; padding: clamp(26px, 3vw, 36px); display: flex; flex-direction: column; gap: 14px">
+          <span style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #B0503A">Frases</span>
+          <p style="margin: 0; font-size: 18px; line-height: 1.45">Frases concretas para llevar a tu próxima conversación.</p>
+        </div>
+        <div style="background: #FAF5EF; padding: clamp(26px, 3vw, 36px); display: flex; flex-direction: column; gap: 14px">
+          <span style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #B0503A">Guía</span>
+          <p style="margin: 0; font-size: 18px; line-height: 1.45">Guía descargable con la fórmula: contexto + observación + necesidad + propuesta.</p>
+        </div>
+        <div style="background: #FAF5EF; padding: clamp(26px, 3vw, 36px); display: flex; flex-direction: column; gap: 14px">
+          <span style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #B0503A">Práctica</span>
+          <p style="margin: 0; font-size: 18px; line-height: 1.45">Práctica corporal breve para sostener la incomodidad sin retroceder.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Cita" style="padding: 0 clamp(16px, 4vw, 48px) clamp(64px, 9vw, 128px)">
+    <div data-reveal style="max-width: 1240px; margin: 0 auto; padding: clamp(40px, 6vw, 80px) clamp(28px, 5vw, 72px); border-radius: 32px; background: #E8C9BC">
+      <p style="margin: 0; font-family: 'Instrument Serif', serif; font-size: clamp(28px, 3.6vw, 52px); line-height: 1.14; letter-spacing: -0.02em; max-width: 26ch; text-wrap: pretty; color: #241914">Saber Negociar no se trata de aprender a discutir mejor. Se trata de <em>dejar de esperar a estar agotada</em> para decir lo que necesitás.</p>
+    </div>
+  </section>
+
+  <section data-screen-label="Para quién es" style="background: #F1E7DB; padding: clamp(64px, 9vw, 128px) clamp(16px, 4vw, 48px)">
+    <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: clamp(36px, 4vw, 56px)">
+      <div data-reveal style="display: flex; flex-direction: column; gap: 16px">
+        <span style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B5A50">05 — Para quién es</span>
+        <h2 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(32px, 4vw, 56px); line-height: 1.05; letter-spacing: -0.025em">Con honestidad, no es para todas</h2>
+      </div>
+      <div data-reveal style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px">
+        <div style="display: flex; flex-direction: column; gap: 22px; padding: clamp(26px, 3vw, 38px); border-radius: 26px; background: #FAF5EF; border: 1px solid #E6DACB">
+          <h3 style="margin: 0; display: flex; align-items: center; gap: 12px; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 27px; letter-spacing: -0.01em">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; background: #B0503A; color: #FAF5EF; font-family: 'Instrument Sans', sans-serif; font-size: 15px">✓</span>Es para vos si
+          </h3>
+          <div style="display: flex; flex-direction: column; gap: 14px; font-size: 17px; line-height: 1.5">
+            <p style="margin: 0; padding-top: 14px; border-top: 1px solid #E6DACB">Sos una mujer que rinde, resuelve y sostiene, pero le cuesta horrores pedir algo para sí misma.</p>
+            <p style="margin: 0; padding-top: 14px; border-top: 1px solid #E6DACB">Te cansaste de acomodarte primero y negociar (si es que negociás) al final, ya agotada.</p>
+            <p style="margin: 0; padding-top: 14px; border-top: 1px solid #E6DACB">Buscás herramientas concretas para tu próxima conversación difícil, no solo motivación.</p>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 22px; padding: clamp(26px, 3vw, 38px); border-radius: 26px; background: transparent; border: 1px solid #D6C6B4">
+          <h3 style="margin: 0; display: flex; align-items: center; gap: 12px; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 27px; letter-spacing: -0.01em; color: #5B4840">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; border: 1px solid #B8A797; color: #5B4840; font-family: 'Instrument Sans', sans-serif; font-size: 15px">—</span>No es para vos si
+          </h3>
+          <div style="display: flex; flex-direction: column; gap: 14px; font-size: 17px; line-height: 1.5; color: #5B4840">
+            <p style="margin: 0; padding-top: 14px; border-top: 1px solid #D6C6B4">Buscás un guión mágico que evite toda incomodidad.</p>
+            <p style="margin: 0; padding-top: 14px; border-top: 1px solid #D6C6B4">Esperás una fórmula que funcione sin que vos tengas que sostener la conversación.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Lo que cambia" style="padding: clamp(64px, 9vw, 128px) clamp(16px, 4vw, 48px)">
+    <div style="max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(32px, 5vw, 72px); align-items: start">
+      <div data-reveal style="display: flex; flex-direction: column; gap: 20px">
+        <span style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B5A50">06 — Después</span>
+        <h2 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(34px, 4.2vw, 60px); line-height: 1.02; letter-spacing: -0.025em; max-width: 16ch">Lo que cambia de verdad</h2>
+        <a data-cta href="STRIPE_PAYMENT_LINK_URL" style="align-self: flex-start; display: inline-flex; align-items: center; padding: 21px 40px; margin-top: 8px; border-radius: 999px; background: #D9481F; color: #FFF6F0; text-decoration: none; font-size: 17px; font-weight: 600; letter-spacing: 0.01em; box-shadow: 0 14px 34px -14px rgba(217, 72, 31, 0.55)">Quiero el curso <span data-arrow>→</span></a>
+      </div>
+      <div data-reveal style="display: flex; flex-direction: column">
+        <p style="margin: 0; display: flex; gap: 18px; padding: 22px 0; border-top: 1px solid #E6DACB; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.4"><span style="font-family: 'Instrument Serif', serif; color: #B0503A">01</span>Pedís sin sobreexplicarte 40 veces.</p>
+        <p style="margin: 0; display: flex; gap: 18px; padding: 22px 0; border-top: 1px solid #E6DACB; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.4"><span style="font-family: 'Instrument Serif', serif; color: #B0503A">02</span>Negociás desde lo que aportás, no desde lo que esperás que te concedan.</p>
+        <p style="margin: 0; display: flex; gap: 18px; padding: 22px 0; border-top: 1px solid #E6DACB; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.4"><span style="font-family: 'Instrument Serif', serif; color: #B0503A">03</span>Sostenés una conversación incómoda sin achicarte.</p>
+        <p style="margin: 0; display: flex; gap: 18px; padding: 22px 0; border-top: 1px solid #E6DACB; border-bottom: 1px solid #E6DACB; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.4"><span style="font-family: 'Instrument Serif', serif; color: #B0503A">04</span>Cerrás acuerdos concretos, con fecha y con letra clara.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Sobre Sharon" style="background: #F1E7DB; padding: clamp(64px, 9vw, 128px) clamp(16px, 4vw, 48px)">
+    <div style="max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(32px, 5vw, 72px); align-items: center">
+      <div data-reveal style="position: relative; width: 100%; aspect-ratio: 4 / 5; max-width: 460px">
+        <!-- ⚠️ IMAGEN PROVISORIA — foto de stock, NO es Sharon. Reemplazar antes de publicar el dominio. -->
+        <img src="assets/sharon-placeholder.jpg" alt="Placeholder — reemplazar con foto de Sharon"
+             style="width: 100%; height: 100%; object-fit: cover; border-radius: 28px">
+      </div>
+      <div data-reveal style="display: flex; flex-direction: column; gap: 22px">
+        <span style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B5A50">07 — Quién te acompaña</span>
+        <h2 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(34px, 4.2vw, 58px); line-height: 1.02; letter-spacing: -0.025em">Sharon Glantz</h2>
+        <span style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: #B0503A">Psicóloga · Mentora</span>
+        <p style="margin: 0; font-size: clamp(17px, 1.5vw, 20px); line-height: 1.55; color: #4A382F; max-width: 46ch; text-wrap: pretty">⟨ Bio de Sharon — a completar ⟩</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="FAQ" style="padding: clamp(64px, 9vw, 128px) clamp(16px, 4vw, 48px)">
+    <div style="max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(32px, 5vw, 72px); align-items: start">
+      <div data-reveal style="display: flex; flex-direction: column; gap: 16px">
+        <span style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B5A50">08 — Dudas</span>
+        <h2 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(32px, 4vw, 56px); line-height: 1.03; letter-spacing: -0.025em; max-width: 14ch">Preguntas frecuentes</h2>
+      </div>
+      <div data-reveal style="display: flex; flex-direction: column; gap: 12px">
+        <details style="padding: 22px 26px; border-radius: 20px; background: #F1E7DB">
+          <summary style="display: flex; align-items: center; justify-content: space-between; gap: 20px; list-style: none; cursor: pointer; font-size: 18px; font-weight: 500">¿Cuál es la inversión?<span data-chev style="display: inline-block; font-size: 20px; color: #B0503A; transition: transform 200ms ease">+</span></summary>
+          <p style="margin: 16px 0 0; font-size: 17px; line-height: 1.55; color: #4A382F">⟨ A completar ⟩</p>
+        </details>
+        <details style="padding: 22px 26px; border-radius: 20px; background: #F1E7DB">
+          <summary style="display: flex; align-items: center; justify-content: space-between; gap: 20px; list-style: none; cursor: pointer; font-size: 18px; font-weight: 500">¿Cuánto dura el curso?<span data-chev style="display: inline-block; font-size: 20px; color: #B0503A; transition: transform 200ms ease">+</span></summary>
+          <p style="margin: 16px 0 0; font-size: 17px; line-height: 1.55; color: #4A382F">⟨ A completar ⟩</p>
+        </details>
+        <details style="padding: 22px 26px; border-radius: 20px; background: #F1E7DB">
+          <summary style="display: flex; align-items: center; justify-content: space-between; gap: 20px; list-style: none; cursor: pointer; font-size: 18px; font-weight: 500">¿Necesito estar en un momento «ideal» de mi carrera para hacerlo?<span data-chev style="display: inline-block; font-size: 20px; color: #B0503A; transition: transform 200ms ease">+</span></summary>
+          <p style="margin: 16px 0 0; font-size: 17px; line-height: 1.55; color: #4A382F">No. Este curso es para la mujer real, en el trabajo real que tiene ahora. No para una versión ideal de vos.</p>
+        </details>
+        <details style="padding: 22px 26px; border-radius: 20px; background: #F1E7DB">
+          <summary style="display: flex; align-items: center; justify-content: space-between; gap: 20px; list-style: none; cursor: pointer; font-size: 18px; font-weight: 500">¿Cuándo puedo empezar?<span data-chev style="display: inline-block; font-size: 20px; color: #B0503A; transition: transform 200ms ease">+</span></summary>
+          <p style="margin: 16px 0 0; font-size: 17px; line-height: 1.55; color: #4A382F">⟨ A completar — apenas comprás, o desde una fecha de lanzamiento ⟩</p>
+        </details>
+        <details style="padding: 22px 26px; border-radius: 20px; background: #F1E7DB">
+          <summary style="display: flex; align-items: center; justify-content: space-between; gap: 20px; list-style: none; cursor: pointer; font-size: 18px; font-weight: 500">¿Necesito hacerlo en orden, o puedo ir directo a lo que más me sirve?<span data-chev style="display: inline-block; font-size: 20px; color: #B0503A; transition: transform 200ms ease">+</span></summary>
+          <p style="margin: 16px 0 0; font-size: 17px; line-height: 1.55; color: #4A382F">⟨ A completar ⟩</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="CTA final" style="padding: 0 clamp(16px, 4vw, 48px) clamp(48px, 6vw, 80px)">
+    <div data-reveal style="max-width: 1240px; margin: 0 auto; padding: clamp(48px, 7vw, 104px) clamp(28px, 5vw, 80px); border-radius: 36px; background: #2E201B; color: #F6EBE2; display: flex; flex-direction: column; gap: 30px; align-items: flex-start">
+      <span style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #C9A491">Último paso</span>
+      <h2 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(34px, 5vw, 72px); line-height: 1.0; letter-spacing: -0.03em; max-width: 20ch; text-wrap: pretty">No necesitás tener más argumentos. Necesitás <em style="color: #E8A98F">saber cómo pedir</em>.</h2>
+      <p style="margin: 0; font-size: clamp(17px, 1.5vw, 20px); line-height: 1.5; color: #D6BDAF; max-width: 42ch">Un curso corto, on demand, para tu próxima conversación difícil.</p>
+      <a data-cta data-cta-lift href="STRIPE_PAYMENT_LINK_URL" style="display: inline-flex; align-items: center; padding: 22px 42px; border-radius: 999px; background: #D9481F; color: #FFF6F0; text-decoration: none; font-size: 18px; font-weight: 600; letter-spacing: 0.01em; box-shadow: 0 16px 40px -14px rgba(217, 72, 31, 0.55)">Quiero el curso <span data-arrow>→</span></a>
+    </div>
+  </section>
+
+  <footer style="padding: 0 clamp(16px, 4vw, 48px) clamp(40px, 5vw, 64px)">
+    <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; padding-top: 28px; border-top: 1px solid #E6DACB; font-size: 14px; color: #6B5A50">
+      <span style="font-family: 'Instrument Serif', serif; font-size: 19px; color: #241914">Saber Negociar</span>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px">
+        <a class="footer-link" href="https://mujeresaltorendimiento.online" style="color: #6B5A50; text-decoration: none">M.A.R — Mujeres de Alto Rendimiento</a>
+        <span>WhatsApp +54 911 6190 2228</span>
+        <span>Sharon Glantz © <span id="anio">2026</span></span>
+      </div>
+    </div>
+  </footer>
+</div>
 
 <script>
-// Año del copyright — el 2026 del HTML es el fallback si esto no corre.
+// Año del copyright — el 2026 en el HTML es el fallback si esto no corre.
 document.getElementById('anio').textContent = new Date().getFullYear();
 
-// Única animación de la página: reveal al entrar en viewport, 300ms (§3).
+// Reveal on scroll, tal como en el prototipo de Claude Design.
 (function () {
-  var items = document.querySelectorAll('.reveal');
+  var items = document.querySelectorAll('[data-reveal]');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (reduce || !('IntersectionObserver' in window)) {
-    items.forEach(function (el) { el.classList.add('visible'); });
+    items.forEach(function (el) { el.classList.add('is-visible'); });
     return;
   }
 
   var obs = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
+        entry.target.classList.add('is-visible');
         obs.unobserve(entry.target);
       }
     });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
 
   items.forEach(function (el) { obs.observe(el); });
 })();

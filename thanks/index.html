@@ -5,19 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Gracias — Saber Negociar</title>
 <meta name="robots" content="noindex">
-<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=boska@400,500&f[]=switzer@400,500&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --papel:#F2F0EB; --tinta:#191C1E; --oxido:#7E2B32; --pizarra:#5E6A6E; --linea:#D6D2C9;
-  --display:'Boska','Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
-  --cuerpo:'Switzer','Helvetica Neue',Helvetica,Arial,system-ui,sans-serif;
-  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  --gutter:clamp(1.25rem,5vw,2.5rem);
-}
 *,*::before,*::after{box-sizing:border-box;}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
 body{
@@ -25,42 +16,45 @@ body{
   min-height:100svh;
   display:grid;
   place-content:center;
-  gap:1.5rem;
-  padding:clamp(2rem,10vh,5rem) max(var(--gutter),env(safe-area-inset-left)) clamp(2rem,10vh,5rem) max(var(--gutter),env(safe-area-inset-right));
-  background:var(--papel);
-  color:var(--tinta);
-  font-family:var(--cuerpo);
+  padding:clamp(2rem,10vh,5rem) max(clamp(1.25rem,5vw,2.5rem),env(safe-area-inset-left)) clamp(2rem,10vh,5rem) max(clamp(1.25rem,5vw,2.5rem),env(safe-area-inset-right));
+  background:#FAF5EF;
+  color:#241914;
+  font-family:'Instrument Sans', system-ui, sans-serif;
   font-size:1.125rem;
   line-height:1.7;
-  text-wrap:pretty;
+  -webkit-font-smoothing:antialiased;
 }
 .wrap{width:min(52ch,100%);margin-inline:auto;}
 .eyebrow{
-  font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--pizarra);margin:0 0 1.5rem;
+  display:inline-flex;align-items:center;gap:9px;
+  padding:8px 16px 8px 12px;margin-bottom:1.75rem;
+  border-radius:999px;background:#F1E7DB;border:1px solid #E6DACB;
+  font-size:13px;letter-spacing:.01em;color:#5B4840;
 }
+.eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:#B0503A;}
 h1{
-  font-family:var(--display);
-  font-size:clamp(2.25rem,6vw,3.5rem);
-  font-weight:500;line-height:1.05;letter-spacing:-.02em;margin:0;
+  font-family:'Instrument Serif', serif;
+  font-weight:400;
+  font-size:clamp(2.5rem,7vw,4rem);
+  line-height:.95;letter-spacing:-.03em;margin:0;
 }
-p{margin:1.4rem 0 0;}
-.pizarra{color:var(--pizarra);}
+h1 em{font-style:italic;color:#B0503A;}
+p{margin:1.4rem 0 0;font-size:clamp(17px,1.5vw,20px);line-height:1.55;color:#4A382F;}
+.pizarra{color:#6B5A50;}
 .volver{
   display:inline-block;margin-top:2.5rem;
-  font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--tinta);
-  text-decoration:none;border-bottom:1px solid var(--linea);
-  padding-block:.5rem;
+  font-size:14px;font-weight:500;
+  color:#241914;text-decoration:none;border-bottom:1px solid #D6C6B4;
+  padding-block:.4rem;transition:color 160ms ease, border-color 160ms ease;
 }
-.volver:hover{border-bottom-color:var(--tinta);}
-a:focus-visible{outline:2px solid var(--oxido);outline-offset:3px;}
+.volver:hover{color:#B0503A;border-bottom-color:#B0503A;}
+a:focus-visible{outline:2px solid #B0503A;outline-offset:3px;}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <p class="eyebrow">Listo</p>
-  <h1>Ya estás adentro.</h1>
+  <span class="eyebrow">Listo</span>
+  <h1>Ya estás <em>adentro</em>.</h1>
   <p>Te llega un mail con el acceso al curso en los próximos minutos.</p>
   <p class="pizarra">Si no lo ves, revisá spam o promociones antes de escribirnos — casi siempre está ahí.</p>
   <a class="volver" href="../">Volver al inicio</a>
